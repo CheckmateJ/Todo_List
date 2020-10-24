@@ -1,6 +1,46 @@
-body {
-    background-color: lightgray;
+
+html{
+    height: 100%;
 }
-/* .Clock{
-    
-} */
+body {
+    background-image: linear-gradient(45deg, yellow, red);
+    background-repeat: no-repeat;
+}
+.header{
+    position: absolute; left: 40%; top:10%;
+}
+.Todo-add{
+    position: absolute; left: 35%;top: 20%;
+    padding-left: 0;
+    width: 400px;
+    height: 50px;
+}
+.Todo-add-btn{
+    position: absolute; left: 62%;top: 20%;
+    height: 55px;
+}
+.Todo-list{
+  padding-left: 0;
+  width: auto;
+  color: #333;
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  position: absolute;left: 35%;top: 50%;
+  list-style: none;
+}
+.Todo-list li{
+    padding: 15px;
+}
+.delete-item{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.tasks input{
+    background-color: transparent;
+    border: 0;
+}
+.tasks input:focus{
+    outline: none;
+}

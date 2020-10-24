@@ -4,10 +4,11 @@ import React, { Component } from 'react'
 class TodoContext extends Component {
   constructor(props){
     super(props);
-    this.state = {tasks: [], text: '', name: "Todo List:"};
+    this.state = {tasks: [], text: '', name: "Todo List:", id:''};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.setUpdate = this.setUpdate.bind(this);
   }
 
   handleDelete(id){
@@ -49,14 +50,28 @@ class TodoContext extends Component {
     }
   }
 
+  setUpdate(text, id){
+    const tasks = this.state.tasks;
+    tasks.map(task =>{
+      if(task.id ===id){
+        task.text = text;
+      }
+    })
+    this.setState({
+      tasks: tasks
+    })
+
+  }
+
   render(){
     return (
-      <div className="rectangle">
+      
+      <div className="container">
         <h3  className="header">{this.state.name}</h3>
-        <TodoList tasks={this.state.tasks} handleDelete={this.handleDelete}/>
+        <TodoList tasks={this.state.tasks} handleDelete={this.handleDelete} setUpdate={this.setUpdate}/>
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} value={this.state.text} placeholder="What do you have to do?"/>
-          <button type="submit"> + </button>
+          <input className="Todo-add" onChange={this.handleChange} value={this.state.text} placeholder="What do you have to do?"/>
+          <button className="Todo-add-btn" type="submit"> + </button>
         </form>
       </div>
     )
@@ -69,13 +84,14 @@ class TodoList extends Component{
     this.props.handleDelete(id);
   }
 
-  render(){
+  render(props){
     return (
       <div className="Todo-list">
       <ol>
         {this.props.tasks.map(task => (
-          <li key={task.id}>{task.text}
-          <button onClick={this.handleDelete.bind(this,task)}>Delete</button>
+          <li className="tasks" key={task.id}>
+          <input type="text" id={task.id} value={task.text} onChange={(e) => { this.props.setUpdate(e.target.value, task.id)}}/> 
+          <button class="delete-item" onClick={this.handleDelete.bind(this,task)}>Delete</button>
           </li>
         ))}
       </ol>
