@@ -11,12 +11,15 @@ class TodoContext extends Component {
     this.setUpdate = this.setUpdate.bind(this);
   }
 
+
+  // delete task
   handleDelete(id){
     this.setState(prevState => ({
       tasks: prevState.tasks.filter(el => el != id)
     }));
   }
 
+  // add new task to list 
   handleSubmit(e){
     e.preventDefault();
     if(this.state.text.length === 0){
@@ -33,14 +36,17 @@ class TodoContext extends Component {
     
   }
 
+  // fetch value from input 
   handleChange(e){
     this.setState({text: e.target.value})
   }
   
+  // save task to local storage
   componentDidUpdate(){
     localStorage.setItem('tasks', JSON.stringify(this.state.tasks))
   }
 
+  // get task from local storage 
   componentWillMount(){
     let tasksList = localStorage.getItem('tasks')
     if(tasksList){
@@ -50,6 +56,7 @@ class TodoContext extends Component {
     }
   }
 
+  // edit existing task
   setUpdate(text, id){
     const tasks = this.state.tasks;
     tasks.map(task =>{
@@ -65,7 +72,6 @@ class TodoContext extends Component {
 
   render(){
     return (
-      
       <div className="container">
         <h3  className="header">{this.state.name}</h3>
         <TodoList tasks={this.state.tasks} handleDelete={this.handleDelete} setUpdate={this.setUpdate}/>
@@ -84,7 +90,7 @@ class TodoList extends Component{
     this.props.handleDelete(id);
   }
 
-  render(props){
+  render(){
     return (
       <div className="Todo-list">
       <ol>

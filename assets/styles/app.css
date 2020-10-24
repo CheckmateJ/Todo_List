@@ -41,6 +41,3 @@ body {
     background-color: transparent;
     border: 0;
 }
-.tasks input:focus{
-    outline: none;
-}
